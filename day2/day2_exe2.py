@@ -4,7 +4,8 @@
 # Find the volume of the room
 # PS Think about units and what is the most appropriate data type for this
 
-width = int(input("Please input width "))
-length = int(input("Please input length "))
-height = int(input("Please input height "))
-print(f"Volume of the room is {width*length*height}")
+width = float(input("Please input width "))
+length = float(input("Please input length "))
+height = float(input("Please input height "))
+volume = width*length*height
+print(f"Volume of the room is {round(volume,2)}")

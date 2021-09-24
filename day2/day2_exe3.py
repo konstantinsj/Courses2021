@@ -12,4 +12,4 @@ prec = 2
 
 #convert celsius to farenheit 
 farenheit = 32+celsius*(9/5)
-print(f" {celsius} degrees in Celsius is {round(farenheit, prec)} degrees in Farenheit")
+print(f"{celsius} degrees in Celsius is {round(farenheit, prec)} degrees in Farenheit")
