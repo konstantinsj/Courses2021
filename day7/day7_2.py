@@ -12,10 +12,7 @@
 def is_palindrome(text):
     """Checks if input text is palindrome"""
     text = text.lower().replace(" ", "")
-    if text == text[::-1]:
-        return True
-    else:
-        return False
+    return text == text[::-1]
 
 
 print(is_palindrome("Alus ari i ra    sula"))
