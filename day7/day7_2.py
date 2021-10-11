@@ -11,7 +11,8 @@
 
 def is_palindrome(text):
     """Checks if input text is palindrome"""
-    if text.lower().replace(" ", "") == text[::-1].lower().replace(" ", ""):
+    text = text.lower().replace(" ", "")
+    if text == text[::-1]:
         return True
     else:
         return False
