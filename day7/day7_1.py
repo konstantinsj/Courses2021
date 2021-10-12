@@ -8,11 +8,11 @@
 # Example add_mult (2,5,4) -> will return (2 + 4) * 5 = 30
 
 
-def add_mult(numbers):
+def add_mult(a, b, c):
+    numbers = [a, b, c]
     max_num = max(numbers)  #finding largest number
-    numbers.remove(max(numbers))    #removing largest number
+    numbers.remove(max_num)    #removing largest number
     return sum(numbers) * max_num
 
 
-numbers = [2, 5, 4]
-print(add_mult(numbers))
+print(add_mult(2, 5, 4))
