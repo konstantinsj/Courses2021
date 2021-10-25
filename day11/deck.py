@@ -47,10 +47,3 @@ class Deck:
             #    self.card_list.remove(card)
             # self.card_list = list(set(self.card_list)-set(self.spent)) # set solution, but cards are shuffled
         return self.spent
-
-
-new_deck = Deck()
-new_deck.shuffle()
-print(new_deck.card_list)
-print(new_deck.get_cards())
-print(new_deck.card_list)
