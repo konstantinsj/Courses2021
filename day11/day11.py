@@ -1,7 +1,7 @@
 # 1. The Shuffle
 #
-# write  a function get_shuffled_cards()
-# Inside the function create  a 52-card list of tuples [("2", "diamonds ♦"), ("2", "hearts ♥"), ....., ("A", "spades ♠"), ("A", "clubs ♣")]
+# write  a function get_shuffled_cards() Inside the function create  a 52-card list of tuples [("2", "diamonds ♦"),
+# ("2", "hearts ♥"), ....., ("A", "spades ♠"), ("A", "clubs ♣")]
 #
 # The function returns a shuffled set of cards - the same list with tuples but shuffled!
 # Find the correct method from built in random library.
@@ -16,11 +16,12 @@ def get_shuffled_cards():
     suit = "diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"
     card = 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"
     card_list = list(itertools.product(suit, card))
-    random_card = random.choice(card_list)
-    print(random_card)
+    random.shuffle(card_list)
+    return card_list
 
 
-get_shuffled_cards()
+#get_shuffled_cards()
+#print(get_shuffled_cards())
 
 
 # 2. Deck
@@ -28,6 +29,7 @@ get_shuffled_cards()
 # write a class Deck with the following attributes(variables)
 # available - contains list of card tuples that can be used
 # spent - contains list of card tuples that have been used
+
 # there should be following methods:
 
 # constructor (__init__) method
@@ -51,15 +53,27 @@ class Deck:
         suit = "diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"
         card = 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"
         self.card_list = (list(itertools.product(suit, card)))
-        self.spent = ""
-        available = set(card_list) - set(spent)
-        print(self.card_list)
 
-    def shuffle(self):  #random card
-        random_card = random.choice(self.card_list)
-        print(random_card)
+        # print(self.card_list)
+
+    def shuffle(self):  # shuffle cards
+        random.shuffle(self.card_list)
+        #print(f"Shuffled cards: {self.card_list}")
+        return self
+
+    def get_cards(self, count=1):
+        if count > len(self.card_list):
+            print("Cant get that much!")
+        else:
+            spent = set(self.card_list[:count])
+            print(f"Got cards: {spent}")
+        # print(set(self.card_list))
+        # print(spent)
+        available = (set(self.card_list)) - (spent)
+        #print(available)
         return self
 
 
 new_deck = Deck()
-random_card = Deck.shuffle(new_deck)
+new_deck.shuffle()
+new_deck.get_cards()
