@@ -27,14 +27,16 @@ import random
 
 class Deck:
 
-    def __init__(self, card_list=[], spent=[]):
+    def __init__(self, card_list="", spent=""):
         suit = "diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"
         card = "K", "A"
         # suit = "diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"
         # card = 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"
-        #self.spent = spent
+        self.spent = spent
         self.card_list = (list(itertools.product(suit, card)))
-        #print(self.card_list)
+
+    def display_cards(self):
+        print(f"Available cards {self.card_list}")
 
     def shuffle(self):  # shuffle cards
         random.shuffle(self.card_list)
@@ -45,10 +47,14 @@ class Deck:
         if count > len(self.card_list):
             print("Cant get that much!")
         else:
-            spent = self.card_list[:count]
-            print(f"Got cards: {spent}")
-        return spent
+            self.spent = self.card_list[:count]
+            del self.card_list[0:count]
+            print(f"Got cards: {self.spent}")
+            # self.card_list = list(set(self.card_list)-set(self.spent))  set solution, but cards are shuffled
+        return self
+
 
 new_deck = Deck()
 new_deck.shuffle()
 new_deck.get_cards()
+new_deck.display_cards()
