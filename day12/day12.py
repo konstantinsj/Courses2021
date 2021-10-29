@@ -13,7 +13,6 @@
 
 import os  # system library
 import string
-from datetime import datetime as dt  # datetime has datetime submodule(klase)
 from pathlib import Path  # this is newer for path manipulation
 
 
@@ -24,6 +23,7 @@ def file_line_len(fpath):
 
 
 print(file_line_len("veidenbaums.txt"))
+
 
 # 1b -> write the function get_poem_lines (fpath),
 # which returns a list with only those lines that contain poetry.
@@ -40,3 +40,21 @@ def get_poem_lines(fpath):
 
 
 print(get_poem_lines("veidenbaums.txt"))
+
+
+# 1c -> write the function save_lines (destpath, lines)
+# This function will store all lines into destpath file
+
+def save_lines(destpath, lines):
+    with open(destpath, mode="w", encoding="utf-8") as f:
+        f.writelines("\n".join(lines))
+
+
+save_lines("veid_poems.txt", get_poem_lines("veidenbaums.txt"))
+
+
+# 1e -> write the function clean_punkts (srcpath, destpath)
+#
+# function will open the srcpath file, clear it from https://docs.python.org/3/library/string.html#string.punctuation
+# then function will save the cleaned text into destpath
+
