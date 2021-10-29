@@ -58,3 +58,15 @@ save_lines("veid_poems.txt", get_poem_lines("veidenbaums.txt"))
 # function will open the srcpath file, clear it from https://docs.python.org/3/library/string.html#string.punctuation
 # then function will save the cleaned text into destpath
 
+
+def clean_punkts(srcpath, destpath):
+    with open(srcpath, mode="r", encoding="utf-8") as r:
+        text = r.read()
+        for c in string.punctuation:
+            text = text.replace(c, "")
+
+    with open(destpath, mode="w", encoding="utf-8") as w:
+        w.write(text)
+
+
+clean_punkts("veid_poems.txt", "poems_no_punct.txt")
