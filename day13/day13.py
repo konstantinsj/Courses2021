@@ -3,8 +3,8 @@ import requests
 
 # Getting crypto prices
 
-def get_crypto_prices():
-    url = "https://api2.binance.com/api/v3/ticker/24hr"
+def get_crypto_prices(url="https://api2.binance.com/api/v3/ticker/24hr"):
+
     response = requests.get(url)  # so we made a HTTP GET request here just like a browser would
     prices = dict()                # dict with trading pair prices
 
