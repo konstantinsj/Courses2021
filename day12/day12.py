@@ -13,6 +13,7 @@
 
 import os  # system library
 import string
+import collections
 from pathlib import Path  # this is newer for path manipulation
 
 
@@ -59,14 +60,43 @@ save_lines("veid_poems.txt", get_poem_lines("veidenbaums.txt"))
 # then function will save the cleaned text into destpath
 
 
-def clean_punkts(srcpath, destpath):
-    with open(srcpath, mode="r", encoding="utf-8") as r:
+def clean_punkts(srcpath, destpath, bad_chars=string.punctuation, encoding="UTF-8"):
+    with open(srcpath, mode="r", encoding=encoding) as r:
         text = r.read()
-        for c in string.punctuation:
+        for c in bad_chars:
             text = text.replace(c, "")
 
-    with open(destpath, mode="w", encoding="utf-8") as w:
+    with open(destpath, mode="w", encoding=encoding) as w:
         w.write(text)
 
 
 clean_punkts("veid_poems.txt", "poems_no_punct.txt")
+
+
+# 1f -> write the function get_word_usage (srcpath, destpath)
+#
+# The function opens the file and finds the most frequently used words
+# recommendation to use Counter module!
+# assume that the words are separated by either whitespace or newline (the good old split will come in handy)
+#
+# the saved list of words and frequency should be saved in destpath in the following form:
+#
+# vards skaits
+#
+# un 3423
+# es 3242
+#
+# PS to test, for srcpath use the file that is poetry only and has no punctuation and also the words are all in
+# lowercase
+
+def get_word_usage(srcpath, destpath, encode="UTF-8"):
+    with open(srcpath, mode="r", encoding=encode) as r:
+        text = r.read().lower().split()                     #split to list of words
+        counter = collections.Counter(text).most_common()   #count words and sort them
+
+    with open(destpath, mode="w", encoding=encode) as w:
+        for word, count in counter:
+            w.write(f"{word} {count}\n")
+
+
+get_word_usage("poems_no_punct.txt", "word_count.txt")
