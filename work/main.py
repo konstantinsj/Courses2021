@@ -23,6 +23,7 @@ deal_type = '&dealType=sale'
 districts = '&districts=R%C4%ABga'
 subdistricts = '&subdistricts=Centrs%2CVecr%C4%ABga&'
 
+address = By.CLASS_NAME, 'browse-card__address__text'
 browser.get((url + (type + ((districts + (subdistricts)) + price_to + deal_type))));
 result = list()
 
@@ -31,9 +32,9 @@ while True:
     elements = browser.find_element(*card_list)
     ads = elements.find_elements(*cards)
     print(f"Got {len(ads)} results on this page")
-    for i in range(len(ads)):  # iterating elements on page
-        result.append(ads[i].find_element(*cost_price).text)
-        browser.execute_script(scroll_into_view, ads[i])
+    for i in range(len(ads)):                               # iterating elements on page
+        result.append([ads[i].find_element(*cost_price).text, ads[i].find_element(*address).text])
+        browser.execute_script(scroll_into_view, ads[i])    # need to scroll otherwise no result
     try:
         browser.find_element(*next_page_disabled).is_displayed()
         print("No next page!")
