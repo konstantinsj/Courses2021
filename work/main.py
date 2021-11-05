@@ -7,6 +7,8 @@ from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 start_time = time.time()
 browser = webdriver.Chrome('chromedriver')  # path to chromedriver
@@ -17,11 +19,12 @@ cards = "browse-card-wrapper"
 next_page_disabled = "browse__pagination__border.browse__pagination__border--disabled"
 
 browser.get('https://inch.lv/browse?type=apartment&districts=R%C4%ABga&subdistricts=Centrs%2CVecr%C4%ABga&page=1&priceTo=70000&dealType=sale');  #
-time.sleep(1)
+#time.sleep(1)
 price = list()
+wait = WebDriverWait(browser, 10)
 
 while True:
-    time.sleep(1)
+    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, card_list)))
     elements = browser.find_element(By.CLASS_NAME, card_list)
     ads = elements.find_elements(By.CLASS_NAME, cards)
     print(f"Got {len(ads)} results on this page")
@@ -37,7 +40,6 @@ while True:
             browser.find_element(By.CLASS_NAME, next_page).click()
         except (TimeoutException, WebDriverException):
             break
-    time.sleep(3)
 
 print(f"Total results: {len(price)}")
 print(price)
