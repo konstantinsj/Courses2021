@@ -16,11 +16,11 @@ card_list = 'browse-card-list__data'
 cards = "browse-card-wrapper"
 next_page_disabled = "browse__pagination__border.browse__pagination__border--disabled"
 
-browser.get('https://inch.lv/browse?type=apartment&districts=R%C4%ABga&subdistricts=Centrs%2CVecr%C4%ABga&page=1&priceTo=60000&dealType=sale');  #
+browser.get('https://inch.lv/browse?type=apartment&districts=R%C4%ABga&subdistricts=Centrs%2CVecr%C4%ABga&page=1&priceTo=70000&dealType=sale');  #
 time.sleep(1)
 price = list()
 
-while browser.find_element(By.CLASS_NAME, next_page).is_displayed():
+while True:
     time.sleep(1)
     elements = browser.find_element(By.CLASS_NAME, card_list)
     ads = elements.find_elements(By.CLASS_NAME, cards)
@@ -32,8 +32,11 @@ while browser.find_element(By.CLASS_NAME, next_page).is_displayed():
         browser.find_element(By.CLASS_NAME, next_page_disabled).is_displayed()
         print("No next page!")
         break
-    except (TimeoutException, WebDriverException) as e:
-        browser.find_element(By.CLASS_NAME, next_page).click()
+    except (TimeoutException, WebDriverException):
+        try:
+            browser.find_element(By.CLASS_NAME, next_page).click()
+        except (TimeoutException, WebDriverException):
+            break
     time.sleep(3)
 
 print(f"Total results: {len(price)}")
