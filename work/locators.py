@@ -8,3 +8,4 @@ class Inch(object):
     CARDS = By.CLASS_NAME, "browse-card-wrapper"
     COST_PRICE = By.CLASS_NAME, "browse-card__cost__price"
     NEXT_PAGE_DISABLED = By.CLASS_NAME, "browse__pagination__border.browse__pagination__border--disabled"
+    ADDRESS = By.CLASS_NAME, 'browse-card__address__text'

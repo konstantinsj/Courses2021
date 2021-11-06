@@ -11,8 +11,6 @@ start_time = time.time()
 
 browser = webdriver.Chrome('chromedriver')  # path to chromedriver
 wait = WebDriverWait(browser, 10)
-
-
 scroll_into_view = "arguments[0].scrollIntoView();"
 
 url = 'https://inch.lv/browse?type='
@@ -22,7 +20,7 @@ deal_type = '&dealType=sale'
 districts = '&districts=R%C4%ABga'
 subdistricts = '&subdistricts=Centrs%2CVecr%C4%ABga&'
 
-address = By.CLASS_NAME, 'browse-card__address__text'
+
 browser.get((url + (type + ((districts + (subdistricts)) + price_to + deal_type))));
 result = list()
 
@@ -32,7 +30,7 @@ while True:
     ads = elements.find_elements(*Inch.CARDS)
     print(f"Got {len(ads)} results on this page")
     for i in range(len(ads)):                               # iterating elements on page
-        result.append([ads[i].find_element(*Inch.COST_PRICE).text, ads[i].find_element(*address).text])
+        result.append([ads[i].find_element(*Inch.COST_PRICE).text, ads[i].find_element(*Inch.ADDRESS).text])
         browser.execute_script(scroll_into_view, ads[i])    # need to scroll otherwise no result
     try:
         browser.find_element(*Inch.NEXT_PAGE_DISABLED).is_displayed()
