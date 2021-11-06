@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-class Inch(object):
+class Locators(object):
     """A class for main page locators. All main page locators should come here"""
 
     NEXT_PAGE = By.CLASS_NAME, "browse__pagination__next"

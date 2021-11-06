@@ -4,7 +4,8 @@ from work.page import InchLv
 
 def main():
     start_time = time.time()
-    print(InchLv.get_data())
+    page = InchLv()
+    print(page.get_data())
     print("--- %s seconds ---" % (time.time() - start_time))
 
 
