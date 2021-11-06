@@ -26,7 +26,8 @@ class InchLv(object):
         returns list of results
         """
 
-        self.browser.get((f"{url}type={type}&districts={districts}&subdistricts={subdistricts}&priceTo={priceTo}&dealType={deal_type}"));
+        self.browser.get(
+            f"{url}type={type}&districts={districts}&subdistricts={subdistricts}&priceTo={priceTo}&dealType={deal_type}");
         result = list()
         while True:
             try:
@@ -35,8 +36,8 @@ class InchLv(object):
                 ads = elements.find_elements(*Locators.CARDS)
                 print(f"Got {len(ads)} results on this page")
                 for i in range(len(ads)):  # iterating elements on page
-                    result.append(
-                        [ads[i].find_element(*Locators.COST_PRICE).text, ads[i].find_element(*Locators.ADDRESS).text])
+                    result.append({'address': ads[i].find_element(*Locators.ADDRESS).text,
+                                   'price': ads[i].find_element(*Locators.COST_PRICE).text})
                     self.browser.execute_script(self.scroll_into_view, ads[i])  # need to scroll otherwise no result
                 try:
                     self.browser.find_element(*Locators.NEXT_PAGE_DISABLED).is_displayed()
@@ -47,7 +48,7 @@ class InchLv(object):
                         self.browser.find_element(*Locators.NEXT_PAGE).click()
                     except (TimeoutException, WebDriverException):
                         break
-            except (TimeoutException, WebDriverException):
+            except (TimeoutException, WebDriverException):      # 0 results
                 print("No data found")
                 break
 
