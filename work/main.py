@@ -5,17 +5,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from work.locators import Inch
+
 start_time = time.time()
 
 browser = webdriver.Chrome('chromedriver')  # path to chromedriver
 wait = WebDriverWait(browser, 10)
 
-next_page = By.CLASS_NAME, "browse__pagination__next"
+
 scroll_into_view = "arguments[0].scrollIntoView();"
-card_list = By.CLASS_NAME, 'browse-card-list__data'
-cards = By.CLASS_NAME, "browse-card-wrapper"
-cost_price = By.CLASS_NAME, "browse-card__cost__price"
-next_page_disabled = By.CLASS_NAME, "browse__pagination__border.browse__pagination__border--disabled"
 
 url = 'https://inch.lv/browse?type='
 type = 'apartment'
@@ -30,19 +28,19 @@ result = list()
 
 while True:
     wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'browse-card-list__data')))
-    elements = browser.find_element(*card_list)
-    ads = elements.find_elements(*cards)
+    elements = browser.find_element(*Inch.CARD_LIST)
+    ads = elements.find_elements(*Inch.CARDS)
     print(f"Got {len(ads)} results on this page")
     for i in range(len(ads)):                               # iterating elements on page
-        result.append([ads[i].find_element(*cost_price).text, ads[i].find_element(*address).text])
+        result.append([ads[i].find_element(*Inch.COST_PRICE).text, ads[i].find_element(*address).text])
         browser.execute_script(scroll_into_view, ads[i])    # need to scroll otherwise no result
     try:
-        browser.find_element(*next_page_disabled).is_displayed()
+        browser.find_element(*Inch.NEXT_PAGE_DISABLED).is_displayed()
         print("No next page!")
         break
     except (TimeoutException, WebDriverException):
         try:
-            browser.find_element(*next_page).click()
+            browser.find_element(*Inch.NEXT_PAGE).click()
         except (TimeoutException, WebDriverException):
             break
 
