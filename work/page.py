@@ -40,5 +40,10 @@ class InchLv(object):
                     break
 
         print(f"Total results: {len(result)}")
-        self.browser.quit()
         return result
+
+    def close(self):
+        if self.browser is not None:
+            print("Closing browser")
+            self.browser.close()
+            self.browser.quit()
