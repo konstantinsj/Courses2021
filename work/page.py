@@ -16,17 +16,17 @@ class InchLv(object):
         self.scroll_into_view = "arguments[0].scrollIntoView();"
 
 
-    def get_data(self, url='https://inch.lv/browse?type=',
+    def get_data(self, url='https://inch.lv/browse?',
                  type='apartment',
-                 price_to='&priceTo=',
-                 deal_type='&dealType=sale',
-                 districts='&districts=R%C4%ABga',
-                 subdistricts='&subdistricts=Centrs%2CVecr%C4%ABga'):
+                 priceTo="",
+                 deal_type='sale',
+                 districts='R%C4%ABga',
+                 subdistricts='Centrs%2CVecr%C4%ABga'):
         """
         returns list of results
         """
 
-        self.browser.get((url + (type + ((districts + (subdistricts)) + price_to + deal_type))));
+        self.browser.get((f"{url}type={type}&districts={districts}&subdistricts={subdistricts}&priceTo={priceTo}&dealType={deal_type}"));
         result = list()
         while True:
             try:
