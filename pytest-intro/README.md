@@ -55,20 +55,53 @@ Pytest invocation
 Test result
 ===========
 
+- asserts - [result/test_assert.py](result/test_assert.py)
+- assert with the reason of the failure - [result/test_assert_message.py](result/test_assert_message.py)
+- aborting test execution and marking the test
+  - `pytest.fail` - as failed - [result/test_fail.py](result/test_fail.py)
+  - `pytest.skip` - as skipped - [result/test_skip.py](result/test_skip.py)
+  - `pytest.xfail` - as xfail (failure as expected behaviour) - [result/test_xfail.py](result/test_xfail.py)
+- dealing with exceptions - `pytest.raises`
+  - exception as the expected behaviour - [exceptions/test_raises.py](exceptions/test_raises.py)
+  - using text and regular expression to match exception - [exception/test_raises_match.py](exceptions/test_raises_match.py)
+  - checking if exception is of expected type - [exceptions/test_raises_class.py](exceptions/test_raises_class.py)
+  - accessing exception for further processing - [exceptions/test_raises_inspect.py](exceptions/test_raises_inspect.py)
+
 
 Test parametrization
 ====================
 
+- pytest.mark.parametrize
+  - the problem - [parametrize/test_parametrize_problem.py](parametrize/test_parametrize_problem.py)
+  - `pytest.mark.parametrize` to the rescue - [parametrize/test_parametrize.py](parametrize/test_parametrize.py)
+- `ids=...`
+- nested parametrization - [parametrize/test_nested_parametrize.py](parametrize/test_nested_parametrize.py)
+- parametrizing exceptions
+  - does_not_raise
+- pytest.param(args...[, marks=..., ] [, id=...])
+- excercise - [parametrize_excercise/test.py](parametrize_excercise/test.py)
+
+
+Marks
+=====
+
+- `pytest.mark.skip` - skip test execution - [marks/test_skip.py](marks/test_skip.py)
+- `pytest.mark.skipif` - conditionally skip test execution - [marks/test_skipif.py](marks/test_skipif.py)
+- `pytest.mark.xfail` - assume failure as success - [marks/test_xfail.py](marks/test_xfail.py)
+- custom marks - [marks/test_custom_marks.py](marks/test_custom_marks.py), 
+  [pytest.ini](pytest.ini)
+
+
+Fixtures
+========
+
+* Excercise 2
 
 Course outline
 ==============
 
-* Marks
-* Test parametrization
-* Excercise 1
+
 * conftest.py
-* Fixtures
-* Excercise 2
 * Allure integration
 * Pytest plug-ins and test config
 * Excercise 3

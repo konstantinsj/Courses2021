@@ -14,5 +14,3 @@ def test(a, b, expected):
     # a=10, b=20, expected=30
     assert sum(a, b) == expected
 
-
-

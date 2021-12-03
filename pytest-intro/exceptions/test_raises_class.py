@@ -1,12 +1,12 @@
 import pytest
 
-class MyException(ValueError):
-    def __init__(self, msg, code):
-        super().__init__(msg)
-        self.code = code
+def test_pass():
+    # this test will pass, because ValueError is descendant of Exception
+    with pytest.raises(Exception):
+        raise ValueError()
 
-def test():
-    with pytest.raises(MyException) as exc_info:
-        raise MyException("error message", 43)
-
-    assert exc_info.value.code == 42
+def test_fail():
+    # this test will fail, because we were expecting ValueError,
+    # but the code threw NotImplementedError
+    with pytest.raises(ValueError):
+        raise NotImplementedError()
